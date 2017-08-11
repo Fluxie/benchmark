@@ -44,3 +44,6 @@ rules.ninja
 # out-of-source build top-level folders.
 build/
 _build/
+
+# Dolphin
+.directory

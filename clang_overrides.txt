@@ -1,0 +1,25 @@
+#include using cmake -DCMAKE_TOOLCHAIN_FILE=toolchain.cmake
+INCLUDE(CMakeForceCompiler) #Disables checks
+SET(CMAKE_SYSTEM_NAME Generic)
+#Generic removes -rdynamic from linker, which llvm-ld doesn't support
+
+SET (CMAKE_C_COMPILER             "/usr/lib/llvm/4/bin/clang")
+SET (CMAKE_C_FLAGS                "-Wall -std=c99")
+SET (CMAKE_C_FLAGS_DEBUG          "-g")
+SET (CMAKE_C_FLAGS_MINSIZEREL     "-Os -DNDEBUG")
+SET (CMAKE_C_FLAGS_RELEASE        "-O4 -DNDEBUG")
+SET (CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g")
+
+SET (CMAKE_CXX_COMPILER             "/usr/lib/llvm/4/bin/clang++")
+SET (CMAKE_CXX_FLAGS                "-Wall")
+SET (CMAKE_CXX_FLAGS_DEBUG          "-g")
+SET (CMAKE_CXX_FLAGS_MINSIZEREL     "-Os -DNDEBUG")
+SET (CMAKE_CXX_FLAGS_RELEASE        "-O4 -DNDEBUG")
+SET (CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
+
+SET (CMAKE_AR      "/usr/lib/llvm/4/bin/llvm-ar")
+SET (CMAKE_LINKER  "/usr/lib/llvm/4/bin/llvm-link")
+SET (CMAKE_NM      "/usr/lib/llvm/4/bin/llvm-nm")
+SET (CMAKE_OBJDUMP "/usr/lib/llvm/4/bin/llvm-objdump")
+SET (CMAKE_RANLIB  "/usr/lib/llvm/4/bin/llvm-ranlib")
+

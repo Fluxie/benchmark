@@ -1200,6 +1200,25 @@ class CSVReporter : public BenchmarkReporter {
   std::set< std::string > user_counter_names_;
 };
 
+class MarkdownReporter : public BenchmarkReporter {
+public:
+  explicit MarkdownReporter(ConsoleReporter::OutputOptions opts_ = ConsoleReporter::OO_Defaults)
+      : output_options_(opts_), name_field_width_(0),
+        prev_counters_(), printed_header_(false) {}
+
+  virtual bool ReportContext(const Context& context);
+  virtual void ReportRuns(const std::vector<Run>& reports);
+
+ protected:
+  virtual void PrintRunData(const Run& report);
+  virtual void PrintHeader(const Run& report);
+
+  ConsoleReporter::OutputOptions output_options_;
+  size_t name_field_width_;
+  UserCounters prev_counters_;
+  bool printed_header_;
+};
+
 inline const char* GetTimeUnitString(TimeUnit unit) {
   switch (unit) {
     case kMillisecond:
